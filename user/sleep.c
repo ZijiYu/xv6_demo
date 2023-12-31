@@ -1,5 +1,5 @@
 #include "kernel/types.h"
-#include "user/users.h"
+#include "user/user.h"
 int main(int argc, char *argv[]){
     if(argc<2){
         printf("[Empty Argument.\n]");
