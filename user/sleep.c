@@ -7,7 +7,7 @@ int main(int argc, char *argv[]){
         printf("[Excessive Arguement]\n");
     }else{
         int tag = 1;
-        int *p = argv[1];
+        char *p = argv[1];
         while(*p){
             if(*p<'0' || *p>'9'){
                 tag = 0;
