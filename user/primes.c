@@ -3,6 +3,7 @@
 
 
 # define MSGSIZE 4
+#define RANGE 35
 
 void get_prime(int receive, int send){// this two api become a pipe
     
@@ -10,7 +11,7 @@ void get_prime(int receive, int send){// this two api become a pipe
     int n;
     int tag = read(receive,&n,MSGSIZE);// receive the first number from pipe
     if(!tag){// no number in the pipe
-        close(read);
+        close(receive);
         exit(0);
     }
     printf("Prime: %d\n",n);//read the first number from pipe and print it
@@ -46,7 +47,7 @@ int main(){
     int p[2];
     pipe(p);
     int i;
-    for(int i =2; i < 36; i++){
+    for(i =2; i <= RANGE; i++){
         write(p[1],&i,MSGSIZE); // the second argument is for location of the input number
     }
     get_prime(p[0],p[1]);
