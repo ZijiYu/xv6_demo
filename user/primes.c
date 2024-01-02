@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include "kernel/types.h"
+#include "user/user.h"
+
 
 # define MSGSIZE 4
 
