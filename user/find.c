@@ -32,6 +32,8 @@ norecur(char* path){
   if(buf[0] == '.' && buf[1] == '.' && buf[2] == '0'){
     return 1;
   }
+  return 0;
+
 }
 
 void
