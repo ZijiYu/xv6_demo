@@ -26,12 +26,14 @@ fmtname(char *path)
 void
 find(char * path, char * target)
 {
+
+
   char buf[512], *p;
   int fd;
   struct dirent de;
   struct stat st;
 
-  if(!strcmp(fmtname(path), target)){// target finded! 
+  if(!strcmp(path, target)){// target finded! 
     printf("path: [%s], fmtname(path): [%s] %d %d %l\n",path, fmtname(path), st.type, st.ino, st.size);
     exit(0); 
   }
@@ -88,11 +90,13 @@ main(int argc, char *argv[]){ // argv allows input multi arguments
     exit(0);
   }
   // find dirctory
-  if(argc < 3){
+  if(argc == 2){
+    printf("finding dir");
     find(".", argv[1]);
     exit(0);
   }
   if(argc == 3){
+    printf("finding file")
     find(argv[1],argv[2]);
     exit(0);
   }
