@@ -26,10 +26,10 @@ fmtname(char *path)
 int
 norecur(char* path){
   char* buf = fmtname(path);
-  if(buf[0]=='.'&&buf[1]=='0'){
+  if(buf[0]=='.'&&buf[1]== 0 ){
     return 1;
   }
-  if(buf[0] == '.' && buf[1] == '.' && buf[2] == '0'){
+  if(buf[0] == '.' && buf[1] == '.' && buf[2] == 0){
     return 1;
   }
   return 0;
@@ -95,7 +95,7 @@ find(char * path, char * target)
   close(fd);
 }
 
-int
+int 
 main(int argc, char *argv[]){ // argv allows input multi arguments
 
   // throw error
