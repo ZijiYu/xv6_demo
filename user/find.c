@@ -74,7 +74,7 @@ find(char * path, char * target)
       }
 
       if(strcmp(fmtname(buf),target) == 0){
-        printf("path: [%s], fmtname(path): [%s]\n",buf, fmtname(path));
+        printf("%s\n",buf);
       } 
     }
     break;
