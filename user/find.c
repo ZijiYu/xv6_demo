@@ -33,10 +33,6 @@ find(char * path, char * target)
   struct dirent de;
   struct stat st;
 
-  if(!strcmp(path, target)){// target finded! 
-    printf("path: [%s], fmtname(path): [%s] %d %d %l\n",path, fmtname(path), st.type, st.ino, st.size);
-    exit(0); 
-  }
 
   if((fd = open(path, 0)) < 0){
     fprintf(2, "find: cannot open %s\n", path);
@@ -47,6 +43,11 @@ find(char * path, char * target)
     fprintf(2, "find: cannot stat %s\n", path);
     close(fd);
     return;
+  }
+
+  if(strcmp(path, target) == 0){// target finded! 
+    printf("path: [%s], fmtname(path): [%s]\n",path, fmtname(path));
+    exit(0); 
   }
 
   switch(st.type){
@@ -72,9 +73,9 @@ find(char * path, char * target)
         continue;
       }
 
-      if(!strcmp(fmtname(buf),target)){
-        printf("buf: %s\n ",buf);
-      }
+      if(strcmp(fmtname(buf),target) == 0){
+        printf("path: [%s], fmtname(path): [%s]\n",buf, fmtname(path));
+      } 
     }
     break;
   }
@@ -91,12 +92,12 @@ main(int argc, char *argv[]){ // argv allows input multi arguments
   }
   // find dirctory
   if(argc == 2){
-    printf("finding dir");
+    printf("[log]finding dir\n");
     find(".", argv[1]);
     exit(0);
   }
   if(argc == 3){
-    printf("finding file");
+    printf("[log]finding file\n");
     find(argv[1],argv[2]);
     exit(0);
   }
