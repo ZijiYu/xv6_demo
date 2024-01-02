@@ -14,7 +14,7 @@ void get_prime(int receive, int send){// this two api become a pipe
         close(receive);
         exit(0);
     }
-    printf("Prime: %d\n",n);//read the first number from pipe and print it
+    printf("prime %d\n",n);//read the first number from pipe and print it
 
 
     int p2[2];
