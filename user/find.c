@@ -23,6 +23,17 @@ fmtname(char *path)
   return buf;
 }
 
+int
+norecur(char* path){
+  char* buf = fmtname(path);
+  if(buf[0]=='.'&&buf[1]=='0'){
+    return 1;
+  }
+  if(buf[0] == '.' && buf[1] == '.' && buf[2] == '0'){
+    return 1;
+  }
+}
+
 void
 find(char * path, char * target)
 {
@@ -45,10 +56,10 @@ find(char * path, char * target)
     return;
   }
 
-  // if(strcmp(path, target) == 0){// target finded! 
-  //   printf("path: [%s], fmtname(path): [%s]\n",path, fmtname(path));
-  //   exit(0); 
-  // }
+  if(strcmp(fmtname(path), target) == 0){// target finded! 
+    printf("%s\n",path);
+    exit(0); 
+  }
 
   switch(st.type){
   case T_FILE:
@@ -73,9 +84,9 @@ find(char * path, char * target)
         continue;
       }
 
-      if(strcmp(fmtname(buf),target) == 0){
-        printf("%s\n",buf);
-      } 
+      if(norecur(buf) == 0){
+        find(buf,target);
+      }
     }
     break;
   }
