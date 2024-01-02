@@ -26,7 +26,7 @@ fmtname(char *path)
 int
 norecur(char* path){
   char* buf = fmtname(path);
-  if(buf[0]=='.'&&buf[1]== 0 ){
+  if(buf[0]=='.' && buf[1]== 0 ){
     return 1;
   }
   if(buf[0] == '.' && buf[1] == '.' && buf[2] == 0){
@@ -60,7 +60,6 @@ find(char * path, char * target)
 
   if(strcmp(fmtname(path), target) == 0){// target finded! 
     printf("%s\n",path);
-    exit(0); 
   }
 
   switch(st.type){
