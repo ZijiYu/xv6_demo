@@ -96,7 +96,7 @@ main(int argc, char *argv[]){ // argv allows input multi arguments
     exit(0);
   }
   if(argc == 3){
-    printf("finding file")
+    printf("finding file");
     find(argv[1],argv[2]);
     exit(0);
   }
