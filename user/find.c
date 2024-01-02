@@ -45,10 +45,10 @@ find(char * path, char * target)
     return;
   }
 
-  if(strcmp(path, target) == 0){// target finded! 
-    printf("path: [%s], fmtname(path): [%s]\n",path, fmtname(path));
-    exit(0); 
-  }
+  // if(strcmp(path, target) == 0){// target finded! 
+  //   printf("path: [%s], fmtname(path): [%s]\n",path, fmtname(path));
+  //   exit(0); 
+  // }
 
   switch(st.type){
   case T_FILE:
@@ -92,12 +92,10 @@ main(int argc, char *argv[]){ // argv allows input multi arguments
   }
   // find dirctory
   if(argc == 2){
-    printf("[log]finding dir\n");
     find(".", argv[1]);
     exit(0);
   }
   if(argc == 3){
-    printf("[log]finding file\n");
     find(argv[1],argv[2]);
     exit(0);
   }
