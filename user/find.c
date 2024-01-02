@@ -31,18 +31,18 @@ find(char * path, char * target)
   struct dirent de;
   struct stat st;
 
-  if(!strcmp(path, target)){// target finded! 
-    printf("path: %s, fmtname(path): %s %d %d %l\n",path, fmtname(path), st.type, st.ino, st.size);
+  if(!strcmp(fmtname(path), target)){// target finded! 
+    printf("path: [%s], fmtname(path): [%s] %d %d %l\n",path, fmtname(path), st.type, st.ino, st.size);
     exit(0); 
   }
 
   if((fd = open(path, 0)) < 0){
-    fprintf(2, "ls: cannot open %s\n", path);
+    fprintf(2, "find: cannot open %s\n", path);
     return;
   }
 
   if(fstat(fd, &st) < 0){
-    fprintf(2, "ls: cannot stat %s\n", path);
+    fprintf(2, "find: cannot stat %s\n", path);
     close(fd);
     return;
   }
@@ -70,7 +70,7 @@ find(char * path, char * target)
         continue;
       }
 
-      if(!strcmp(buf,target)){
+      if(!strcmp(fmtname(buf),target)){
         printf("buf: %s\n ",buf);
       }
     }
