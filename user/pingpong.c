@@ -4,7 +4,7 @@
 int main(){
     int p[2];
     pipe(p);
-    pid = fork();
+    int pid = fork();
     if(pid){
         // if(fork()) is equal to if(fork()>0)
         write(p[1],"ping\n",6);
