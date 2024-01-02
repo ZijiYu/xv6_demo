@@ -79,7 +79,7 @@ main(int argc, char *argv[])
     ls(".");
     exit(0);
   }
-  for(i=1; i<argc; i++)
+  for(i=1; i<argc; i++)//Execute the ls command on the arguments one by one
     ls(argv[i]);
   exit(0);
 }

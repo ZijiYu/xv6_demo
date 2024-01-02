@@ -1,3 +1,4 @@
+
 #include "kernel/types.h"
 #include "kernel/stat.h"
 #include "user/user.h"
@@ -23,12 +24,17 @@ fmtname(char *path)
 }
 
 void
-ls(char * path)
+find(char * path, char * target)
 {
   char buf[512], *p;
   int fd;
   struct dirent de;
   struct stat st;
+
+  if(!strcmp(path, target)){// target finded! 
+    printf("path: %s, fmtname(path): %s %d %d %l\n",path, fmtname(path), st.type, st.ino, st.size);
+    exit(0); 
+  }
 
   if((fd = open(path, 0)) < 0){
     fprintf(2, "ls: cannot open %s\n", path);
@@ -43,7 +49,6 @@ ls(char * path)
 
   switch(st.type){
   case T_FILE:
-    printf("path: %s, fmtname(path): %s %d %d %l\n",path, fmtname(path), st.type, st.ino, st.size);
     break;
 
   case T_DIR:
@@ -54,6 +59,7 @@ ls(char * path)
     strcpy(buf, path);
     p = buf+strlen(buf);
     *p++ = '/';
+
     while(read(fd, &de, sizeof(de)) == sizeof(de)){
       if(de.inum == 0)
         continue;
@@ -63,7 +69,10 @@ ls(char * path)
         printf("ls: cannot stat %s\n", buf);
         continue;
       }
-      printf("buf: %s fmtname(buf): %s %d %d %d\n", buf,fmtname(buf), st.type, st.ino, st.size);
+
+      if(!strcmp(buf,target)){
+        printf("buf: %s\n ",buf);
+      }
     }
     break;
   }
@@ -71,15 +80,21 @@ ls(char * path)
 }
 
 int
-main(int argc, char *argv[])// argv allows input multi arguments
-{
-  int i;
+main(int argc, char *argv[]){ // argv allows input multi arguments
 
-  if(argc < 2){
-    ls(".");
+  // throw error
+  if(argc == 1){
+    printf("usage: find [path] [target]\n ");
     exit(0);
   }
-  for(i=1; i<argc; i++)//Execute the ls command on the arguments one by one
-    ls(argv[i]);
+  // find dirctory
+  if(argc < 3){
+    find(".", argv[1]);
+    exit(0);
+  }
+  if(argc == 3){
+    find(argv[1],argv[2]);
+    exit(0);
+  }
   exit(0);
 }
