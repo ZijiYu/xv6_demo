@@ -19,6 +19,12 @@ int main(int argc, char* argv[]){
 
     char *p = buf; // 给命令标准化输入增加一个指针
     for(int i = 0; i < MSGSIZE; i++){
+        if(buf[i] == 'O'){
+            printf("O在index%d位",i);
+        }
+        if(buf[i] == '|'){
+            printf("| 在index%d位",i);
+        }
         if(buf[i] == '\n'){
             printf("换行符在index%d位",i);
             int pid = fork();
