@@ -1,12 +1,12 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include "kernel/types.h"
+#include "user/user.h"
+#include "kernel/param.h"
 
 # define MSGSIZE 16
 
 int main(int argc, char* argv[]){
     char buf[MSGSIZE];
-    int index = read(0, buf, MSGSIZE);
+    read(0, buf, MSGSIZE);
     printf("进程读取到的内容：%s",buf);
 
     for(int i = 0; i < argc; i++){
