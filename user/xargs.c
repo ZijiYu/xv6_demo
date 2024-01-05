@@ -6,14 +6,14 @@
 
 int main(int argc, char* argv[]){
     // 如何获取前一个命令的标准化输出（即此命令标准化输入）
-    char *buf[MSGSIZE];
+    char buf[MSGSIZE];
     read(0, buf, MSGSIZE);
 
     // 如何获取此命令的命令行参数？
     char *xargv[argc];
     int xargc = 0;
     for(int i = 1; i < argc; i++){
-        args[xargc] = argv[i];
+        xargv[xargc] = argv[i];
         xargc++;
     }
 
