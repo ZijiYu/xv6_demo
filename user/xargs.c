@@ -8,7 +8,7 @@ int main(int argc, char* argv[]){
     char buf[MSGSIZE];
     int bytes_read = read(0, buf, MSGSIZE);
     if(bytes_read < 0){
-        perror("读取错误");
+        printf("读取错误");
         exit(1);
     }
 
@@ -18,11 +18,10 @@ int main(int argc, char* argv[]){
         for(int i = 2; i < argc; i++){
             args[i - 1] = argv[i]; // 拷贝其他参数
         }
-        args[argc - 1] = NULL; // 最后一个参数是NULL
 
         // 执行命令
         if(exec(argv[1], args) == -1){
-            perror("执行错误");
+            printf("执行错误");
             exit(1);
         }
     } else {
