@@ -2,7 +2,7 @@
 #include "user/user.h"
 #include "kernel/param.h"
 
-# define MSGSIZE 32
+# define MSGSIZE 64
 
 int main(int argc, char* argv[]){
     //获取前一个命令的标准化输出（即此命令标准化输入）
@@ -28,12 +28,14 @@ int main(int argc, char* argv[]){
             xargv[xargc][j] = buf[i];
             j++;
         }
+
+        int pid = fork();
+        if(pid){
+            exec(argv[1],p);
+        }else{
+            wait(0);
+        }
     }
-
-    exec(argv[1],xargv);
-
-    
-    wait(0);
     exit(0);
 
 
