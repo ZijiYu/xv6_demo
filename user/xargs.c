@@ -25,8 +25,8 @@ int main(int argc, char* argv[]){
         //     printf("args[%d]: %s \n",i,args[i]);
         // }
 
-        exec("echo", argv);
-        exec("echo", args);
+        // exec("echo", argv);
+        // exec("echo", args);
         exec("echo",buf);
 
         // // 执行命令
