@@ -22,7 +22,7 @@ int main(int argc, char* argv[]){
         }
 
         for(int i = 0; i < argc; i++){
-            printf("args[%d]: %s",i,agrs[i]);
+            printf("args[%d]: %s",i,args[i]);
         }
         exec("echo", args);
 
