@@ -25,11 +25,12 @@ int main(int argc, char* argv[]){
             xargv[xargc] = p;
             xargc++;
             xargv[xargc] = 0;
-            if(fork()){
-                wait(0);
-            }else{
-                exec(argv[1],xargv);
-            }
+            // if(fork()){
+            //     wait(0);
+            // }else{
+            //     exec(argv[1],xargv);
+            // }
+            exec(argv[1],xargv);
         }
     }
     exit(0);
