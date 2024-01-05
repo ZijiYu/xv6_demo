@@ -21,7 +21,9 @@ int main(int argc, char* argv[]){
             args[i - 1] = argv[i]; // 拷贝其他参数
         }
 
-        echo(args);
+        for(int i = 0; i < argc; i++){
+            printf("args[%d]: %s",i,agrs[i]);
+        }
         exec("echo", args);
 
         // 执行命令
