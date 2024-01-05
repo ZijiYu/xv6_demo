@@ -5,6 +5,7 @@
 # define MSGSIZE 16
 
 int main(int argc, char* argv[]){
+    printf(MAXARG);
     // 如何获取前一个命令的标准化输出（即此命令标准化输入）
     char buf[MSGSIZE];
     read(0, buf, MSGSIZE);
