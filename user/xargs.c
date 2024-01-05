@@ -25,9 +25,9 @@ int main(int argc, char* argv[]){
         //     printf("args[%d]: %s \n",i,args[i]);
         // }
 
-        // exec("echo", argv);
-        // exec("echo", args);
-        exec("echo",buf);
+        printf("打印：%s",argv);
+        printf("打印：%s",args);
+        printf("打印：%s",buf);
 
         // // 执行命令
         // int tag = exec(argv[1], args);
