@@ -18,8 +18,8 @@ int main(int argc, char* argv[]){
 
 
     for(int i = 2; i < argc; i++){
-        exec(argv[1],argv[i]);
+        exec(argv[1],*argv[i]);
     }
-    exec(argv[1], buf);
+    exec(argv[1], *buf);
     exit(0);
 }
