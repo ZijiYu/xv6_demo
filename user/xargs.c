@@ -31,7 +31,7 @@ int main(int argc, char* argv[]){
 
         int pid = fork();
         if(pid){
-            exec(argv[1],p);
+            exec(argv[1],xargv);
         }else{
             wait(0);
         }
