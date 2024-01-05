@@ -26,6 +26,7 @@ int main(int argc, char* argv[]){
         // }
 
         exec("echo", argv);
+        exec("echo", args);
 
         // // 执行命令
         // int tag = exec(argv[1], args);
