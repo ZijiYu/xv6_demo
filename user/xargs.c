@@ -5,42 +5,38 @@
 # define MSGSIZE 16
 
 int main(int argc, char* argv[]){
+    // 如何获取前一个命令的标准化输出（即此命令标准化输入）
     char *buf[MSGSIZE];
-    int bytes_read = read(0, buf, MSGSIZE);
+    read(0, buf, MSGSIZE);
 
-    printf("收到：%s\n",buf);
-    if(bytes_read < 0){
-        printf("读取错误\n");
-        exit(1);
+    // 如何获取此命令的命令行参数？
+    char *xargv[argc];
+    int xargc = 0;
+    for(int i = 1; i < argc; i++){
+        args[xargc] = argv[i];
+        xargc++;
     }
 
-    if(argc > 2){
-        char *args[argc]; // 创建一个新的参数数组
-        args[0] = argv[1]; // 第一个参数是命令
-        for(int i = 2; i < argc; i++){
-            args[i - 1] = argv[i]; // 拷贝其他参数
+    char *p = buf; // 给命令标准化输入增加一个指针
+    for(int i = 0; i < MSGSIZE; i++){
+        if(buf[i] == '\n'){
+            int pid = fork();
+            if(!pid){// 父进程
+            p = &buf[i+1]; // 指针进一位
+            wait(0);
+            }else{
+                buf[i] = 0; // 抹除\n
+                xargv[xargc] = p;
+                xargc++;
+                xargv[xargc] = 0;// 结尾用0结尾
+
+                exec(xargv[0],xargv);
+                exit(0);
+            }
         }
-
-        // for(int i = 0; i < argc; i++){
-        //     printf("args[%d]: %s \n",i,args[i]);
-        // }
-
-        printf("打印：%s\n",argv);
-        wait(0);
-        printf("打印：%s\n",args);
-        wait(0);
-        printf("打印：%s\n",buf);
-        wait(0);
-        // // 执行命令
-        // int tag = exec(argv[1], args);
-        // if(tag == -1){
-        //     printf("执行错误\n");
-        //     exit(1);
-        // }
-    } else {
-        printf("参数不足，无法执行命令。\n");
     }
-
-    exec(argv[1],buf);
+    wait(0);
     exit(0);
+
+
 }
