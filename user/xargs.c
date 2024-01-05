@@ -15,7 +15,7 @@ int main(int argc, char* argv[]){
     }
 
     if(argc > 2){
-        char *args[argc]; // 创建一个新的参数数组
+        char *args[argc-1]; // 创建一个新的参数数组
         args[0] = argv[1]; // 第一个参数是命令
         for(int i = 2; i < argc; i++){
             args[i - 1] = argv[i]; // 拷贝其他参数
