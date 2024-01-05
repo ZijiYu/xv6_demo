@@ -15,7 +15,7 @@ int main(int argc, char* argv[]){
     }
 
     if(argc > 2){
-        char *args[argc-1]; // 创建一个新的参数数组
+        char *args[argc]; // 创建一个新的参数数组
         args[0] = argv[1]; // 第一个参数是命令
         for(int i = 2; i < argc; i++){
             args[i - 1] = argv[i]; // 拷贝其他参数
@@ -25,10 +25,12 @@ int main(int argc, char* argv[]){
         //     printf("args[%d]: %s \n",i,args[i]);
         // }
 
-        printf("打印：%s",argv);
-        printf("打印：%s",args);
-        printf("打印：%s",buf);
-
+        printf("打印：%s\n",argv);
+        wait(0);
+        printf("打印：%s\n",args);
+        wait(0);
+        printf("打印：%s\n",buf);
+        wait(0);
         // // 执行命令
         // int tag = exec(argv[1], args);
         // if(tag == -1){
