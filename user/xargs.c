@@ -20,6 +20,7 @@ int main(int argc, char* argv[]){
     char *p = buf; // 给命令标准化输入增加一个指针
     for(int i = 0; i < MSGSIZE; i++){
         if(buf[i] == '\n'){
+            print("收到换行符了");
             int pid = fork();
             if(!pid){// 父进程
             p = &buf[i+1]; // 指针进一位
