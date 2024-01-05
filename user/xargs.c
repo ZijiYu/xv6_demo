@@ -6,20 +6,27 @@
 
 int main(int argc, char* argv[]){
     char buf[MSGSIZE];
-    read(0, buf, MSGSIZE);
-    
-    // printf("进程读取到的内容：%s",buf);
-
-    // for(int i = 0; i < argc; i++){
-    //     printf("argv[%d]: %s \n",i,argv[i]);
-    // }
-
-    // echo bye | echo hello to
-
-
-    for(int i = 2; i < argc; i++){
-        exec(argv[1],*argv[i]);
+    int bytes_read = read(0, buf, MSGSIZE);
+    if(bytes_read < 0){
+        perror("读取错误");
+        exit(1);
     }
-    exec(argv[1], *buf);
+
+    if(argc > 2){
+        char *args[argc]; // 创建一个新的参数数组
+        args[0] = argv[1]; // 第一个参数是命令
+        for(int i = 2; i < argc; i++){
+            args[i - 1] = argv[i]; // 拷贝其他参数
+        }
+        args[argc - 1] = NULL; // 最后一个参数是NULL
+
+        // 执行命令
+        if(exec(argv[1], args) == -1){
+            perror("执行错误");
+            exit(1);
+        }
+    } else {
+        printf("参数不足，无法执行命令。\n");
+    }
     exit(0);
 }
