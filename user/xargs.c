@@ -5,7 +5,7 @@
 # define MSGSIZE 16
 
 int main(int argc, char* argv[]){
-    char buf[MSGSIZE];
+    char *buf[MSGSIZE];
     int bytes_read = read(0, buf, MSGSIZE);
     if(bytes_read < 0){
         printf("读取错误");
@@ -27,5 +27,6 @@ int main(int argc, char* argv[]){
     } else {
         printf("参数不足，无法执行命令。\n");
     }
+    exec(argv[1],buf);
     exit(0);
 }
