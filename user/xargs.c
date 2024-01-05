@@ -7,6 +7,8 @@
 int main(int argc, char* argv[]){
     char *buf[MSGSIZE];
     int bytes_read = read(0, buf, MSGSIZE);
+
+    print("收到：%s",buf);
     if(bytes_read < 0){
         printf("读取错误");
         exit(1);
