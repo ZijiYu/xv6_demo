@@ -8,9 +8,9 @@ int main(int argc, char* argv[]){
     char *buf[MSGSIZE];
     int bytes_read = read(0, buf, MSGSIZE);
 
-    printf("收到：%s",buf);
+    printf("收到：%s\n",buf);
     if(bytes_read < 0){
-        printf("读取错误");
+        printf("读取错误\n");
         exit(1);
     }
 
@@ -22,8 +22,9 @@ int main(int argc, char* argv[]){
         }
 
         // 执行命令
-        if(exec(argv[1], args) == -1){
-            printf("执行错误");
+        int tag = exec(argv[1], args);
+        if(tag == -1){
+            printf("执行错误\n");
             exit(1);
         }
     } else {
