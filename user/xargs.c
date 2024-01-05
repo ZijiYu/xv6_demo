@@ -21,17 +21,19 @@ int main(int argc, char* argv[]){
             args[i - 1] = argv[i]; // 拷贝其他参数
         }
 
+        echo(args);
         exec("echo", args);
 
-        // // 执行命令
-        // int tag = exec(argv[1], args);
-        // if(tag == -1){
-        //     printf("执行错误\n");
-        //     exit(1);
-        // }
+        // 执行命令
+        int tag = exec(argv[1], args);
+        if(tag == -1){
+            printf("执行错误\n");
+            exit(1);
+        }
     } else {
         printf("参数不足，无法执行命令。\n");
     }
+
     exec(argv[1],buf);
     exit(0);
 }
