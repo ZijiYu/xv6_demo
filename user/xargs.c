@@ -7,7 +7,7 @@
 int main(int argc, char* argv[]){
     //获取前一个命令的标准化输出（即此命令标准化输入）
 
-    sleep(50);
+    sleep(100);
     char buf[MSGSIZE];
     read(0, buf, MSGSIZE);
 
