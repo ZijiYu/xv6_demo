@@ -22,12 +22,12 @@ int main(int argc, char* argv[]){
     for(int i = 0; i < MSGSIZE; i++){
         if(buf[i] == '\n'){// pipe 前会有一个换行符
             int pid = fork();
-            if(!pid){// 父进程
+            if(pid){// 父进程
             p = &buf[i+1]; // 指针进一位
             wait(0);
             }else{
                 buf[i] = 0; // 抹除\n
-                xargv[xargc] = p;
+                xargv[xargc] = p;  
                 xargc++;
                 xargv[xargc] = 0;// 结尾用0结尾
 
