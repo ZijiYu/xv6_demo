@@ -23,7 +23,7 @@ int main(int argc, char* argv[]){
 
     for(int i = 0; i < MSGSIZE; i++){
         if(buf[i] == '\n'){
-            xargc[argc] = 0; 
+            xargv[argc] = 0; 
         }else{
             xargv[xargc][j] = buf[i];
             j++;
