@@ -10,7 +10,7 @@ int main(int argc, char* argv[]){
     printf("进程读取到的内容：%s",buf);
 
     for(int i = 0; i < argc; i++){
-        printf("argv[%d]: %s",i,argv[i]);
+        printf("argv[%d]: %s \n",i,argv[i]);
     }
     exit(0);
 }
