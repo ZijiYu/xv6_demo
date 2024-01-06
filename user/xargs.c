@@ -24,12 +24,12 @@ int main(int argc, char* argv[]){
         if(buf[i] == '\n'){
             if(fork()){
                 p = &buf[i+1]; //指针不再指向地址的起始位置，而是指向其i+1的位置
-                // printf("父进程中p的位置:%d",p-buf);
+                printf("父进程中p的位置:%d",p-buf);
                 wait(0);
             }else{
                 buf[i] = 0;
                 xargv[xargc] = p;
-                printf("p的位置:%d",p-buf);
+                // printf("p的位置:%d",p-buf);
                 xargc++;
                 xargv[xargc] = 0;
                 xargc++;
