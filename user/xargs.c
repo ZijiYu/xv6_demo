@@ -20,17 +20,15 @@ int main(int argc, char* argv[]){
     }// xargc 的长度是argc-2
 
     char *p = buf;// 指针指向数组的起始位置
-    int count = 0;
     for(int i = 0; i < MSGSIZE; ++i){
         if(buf[i] == '\n'){
-            count++;
-            printf("换行符计算：%d",count);
             if(fork()){
                 p = &buf[i+1]; //指针不再指向地址的起始位置，而是志向其i+1的位置
                 wait(0);
             }else{
                 buf[i] = 0;
                 xargv[xargc] = p;
+                printf("i的位置:%d",p-buf);
                 xargc++;
                 xargv[xargc] = 0;
                 xargc++;
@@ -39,6 +37,7 @@ int main(int argc, char* argv[]){
             }
         }
     }
+    
     wait(0);
     exit(0);
 }
