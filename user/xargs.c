@@ -21,7 +21,7 @@ int main(int argc, char* argv[]){
 
     char *p = buf;
 
-    for(int i = 0; i < MSGSIZE; i++){
+    for(int i = 0; i < MSGSIZE; ++i){
         if(buf[i] == '\n'){
             if(fork()){
                 p = &buf[i+1];
@@ -31,10 +31,12 @@ int main(int argc, char* argv[]){
                 xargv[xargc] = p;
                 xargc++;
                 xargv[xargc] = 0;
+                xargc++;
                 exec(argv[1],xargv);
                 exit(0);
             }
         }
     }
+    wait(0);
     exit(0);
 }
