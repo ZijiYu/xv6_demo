@@ -50,17 +50,15 @@ void get_prime(int receive, int send){// this two api become a pipe
         }
         close(receive);
         wait(0);
-    }else{
+    }else if(!pid){
         get_prime(p2[0],p2[1]);
         close(p2[0]);
         close(p2[1]);
+    }else{
+        printf("[Fork Error]: %d/d\n",pid);
+        exit(pid);
     }
-    
-    // else{
-    //     printf("[Fork Error]: %d/d\n",pid);
-    //     exit(pid);
-    // }
-    // exit(0);
+    exit(0);
 }
 
 int main(){ 
