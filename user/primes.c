@@ -29,11 +29,11 @@ void get_prime(int receive, int send){// this two api become a pipe
             }
         }
         close(receive);
+        close(p2[0]);
+        close(p2[1]);
         wait(0);
     }else if(pid == 0){
         get_prime(p2[0],p2[1]);
-        close(p2[0]);
-        close(p2[1]);
     }else{
         printf("[Fork Error]: %d/d\n",pid);
         exit(pid);
