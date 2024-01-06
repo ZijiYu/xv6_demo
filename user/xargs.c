@@ -12,19 +12,21 @@ int main(int argc, char* argv[]){
     read(0, buf, MSGSIZE);
 
     // 获取此命令的命令行参数？
-    char *xargv[argc];
+    char *xargv[MAXARG];
     int xargc = 0;
     for(int i = 1; i < argc; i++){
         xargv[xargc] = argv[i];
         xargc++;
     }// xargc 的长度是argc-2
 
-    char *p = buf;
-
+    char *p = buf;// 指针指向数组的起始位置
+    int count = 0;
     for(int i = 0; i < MSGSIZE; ++i){
         if(buf[i] == '\n'){
+            count++;
+            printf("换行符计算：%d",count);
             if(fork()){
-                p = &buf[i+1];
+                p = &buf[i+1]; //指针不再指向地址的起始位置，而是志向其i+1的位置
                 wait(0);
             }else{
                 buf[i] = 0;
