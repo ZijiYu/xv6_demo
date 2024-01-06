@@ -21,21 +21,39 @@ void get_prime(int receive, int send){// this two api become a pipe
     pipe(p2);
     int pid = fork();
 
-    if(pid == 0) {
-        get_prime(p2[0],p2[1]);
-    }else if(pid > 0){
-        int m;
+    // if(pid == 0) { // 子进程
+    //     get_prime(p2[0],p2[1]);
+    // }else if(pid > 0){ // 父进程
+    //     int m;
 
+    //     while(read(receive,&m,MSGSIZE)){
+    //         if(m % n){// 如果是一个质数
+    //             write(p2[1],&m,MSGSIZE);
+    //         }
+    //     }
+
+    //     close(receive);
+    //     close(p2[0]);
+    //     close(p2[1]);
+    //     wait(0);// recycle the child
+    // }else{
+    //     printf("[Fork Error]: %d/d\n",pid);
+    //     exit(pid);
+    // }
+
+    if(pid){
+        int m;
         while(read(receive,&m,MSGSIZE)){
-            if(m % n){
+            if(m%n){
                 write(p2[1],&m,MSGSIZE);
             }
         }
-
         close(receive);
+        wait(0);
+    }else{
+        get_prime(p2[0],p2[1]);
         close(p2[0]);
         close(p2[1]);
-        wait(0);// recycle the child
     }else{
         printf("[Fork Error]: %d/d\n",pid);
         exit(pid);
