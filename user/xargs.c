@@ -23,14 +23,16 @@ int main(int argc, char* argv[]){
 
     for(int i = 0; i < MSGSIZE; i++){
         if(buf[i] == '\n'){
-            buf[i] = 0;
-            xargv[xargc] = p;
-            xargc++;
-            xargv[xargc] = 0;
             if(fork()){
+                p = &buf[i+1];
                 wait(0);
             }else{
+                buf[i] = 0;
+                xargv[xargc] = p;
+                xargc++;
+                xargv[xargc] = 0;
                 exec(argv[1],xargv);
+                exit(0);
             }
         }
     }
