@@ -128,7 +128,7 @@ sys_sysinfo(void){
   if(argaddr(0, &addr) < 0) // only one argument "a pointer to a struct sysinfo"
     return -1;
 
-  if(copyout(p->pagetable, addr, (char *)&addr, sizeof(addr)) < 0) // < 0 mean copy fail (from kernel to user)
+  if(copyout(p->pagetable, addr, (char *)&info, sizeof(info)) < 0) // < 0 mean copy fail (from kernel to user)
     return -1;
 
   // printf("free memeory: %lu\n",info.freemem);
