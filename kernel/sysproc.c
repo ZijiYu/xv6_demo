@@ -95,3 +95,10 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+unit 64
+sys_trace(void){
+  printf("Sys_trace: Hi!\n");
+  return 0;
+}
+
