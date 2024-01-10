@@ -125,8 +125,8 @@ sys_sysinfo(void){
   printf("SYS_info: hi!\n");
 
 
-  info -> nproc = get_used_proc();
-  info -> freemem = get_free_memory();
+  info-> nproc = get_used_proc();
+  info-> freemem = get_free_memory();
   printf("free memeory: %d\n",info->freemem);
   printf("used process: %d\n",info->nproc);
   return 0;
@@ -147,7 +147,7 @@ get_free_memory(void){
 
 uint64
 get_used_proc(void){
-  struct proc *p = myproc;
+  struct proc *p = myproc();
   struct proc proc[NPROC];
   uint n = 0;
   for(p = proc; p < &proc[NPROC]; p++){
