@@ -7,9 +7,9 @@
 #include "spinlock.h"
 #include "proc.h"
 #include "sysinfo.h"
-// #include "kalloc.c"
-uint64 get_free_memory();
-uint64 get_used_proc();
+
+// uint64 get_free_memory();
+// uint64 get_used_proc();
 
 
 uint64
@@ -119,11 +119,14 @@ sys_sysinfo(void){
   struct proc *p = myproc();
   struct sysinfo info; 
 
-  info.nproc = get_used_proc();
-  info.freemem = get_free_memory();
+  // info.nproc = get_used_proc();
+  // info.freemem = get_free_memory();
 
-  printf("free memeory: %lu\n",info.freemem);
-  printf("used process: %lu\n",info.nproc);
+  // printf("free memeory: %lu\n",info.freemem);
+  // printf("used process: %lu\n",info.nproc);
+
+  info.nproc = -1;
+  info.freemem = -2;
 
   if(argaddr(0, &addr) < 0) // only one argument "a pointer to a struct sysinfo"
     return -1;
