@@ -136,18 +136,6 @@ sys_sysinfo(void){
   return 0;
 }
 
-uint64
-get_free_memory(){
-  uint64 n = 0;
-  struct run *r;
-  r = kmem.freelist;
-
-  while(r){
-    r = r -> next;
-    n += PGSIZE;
-  }
-  return n; 
-}
 
 uint64
 get_used_proc(){
