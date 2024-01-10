@@ -86,9 +86,11 @@ get_free_memory(){
   struct run *r;
   r = kmem.freelist;
 
+  acquire(&kmem.lock);
   while(r){
     r = r -> next;
     n += PGSIZE;
   }
+  release(&kmem.lock);
   return n; 
 }
