@@ -7,7 +7,7 @@
 #include "spinlock.h"
 #include "proc.h"
 #include "sysinfo.h"
-#include "kalloc.c"
+// #include "kalloc.c"
 
 uint64
 sys_exit(void)
@@ -134,12 +134,12 @@ sys_sysinfo(void){
 
 uint64
 get_free_memory(void){
+  uint n = 0;
   struct run *r;
   r = kmem.freelist;
-  int n = 0;
 
   while(r){
-    kmem.freelist = r -> next;
+    r = r -> next;
     n += PGSIZE;
   }
   return n;
@@ -149,7 +149,7 @@ uint64
 get_used_proc(void){
   struct proc *p = myproc;
   struct proc proc[NPROC];
-  int n = 0;
+  uint n = 0;
   for(p = proc; p < &proc[NPROC]; p++){
     if(p->state != UNUSED){
       n++;
