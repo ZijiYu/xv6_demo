@@ -96,7 +96,7 @@ sys_uptime(void)
   return xticks;
 }
 
-unit64
+uint64
 sys_trace(void){
   printf("Sys_trace: Hi!\n");
   return 0;
