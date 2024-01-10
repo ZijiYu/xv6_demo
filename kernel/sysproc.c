@@ -98,10 +98,13 @@ sys_uptime(void)
 
 uint64
 sys_trace(void){
-  int n; // exit();会有一个int的入参
-  if(argint(0, &n) < 0) // 它通常在内核的系统调用处理函数中使用，用于安全地获取用户空间传递给系统调用的参数
+  int mask; // exit();会有一个int的入参
+  if(argint(0, &mask) < 0) // 它通常在内核的系统调用处理函数中使用，用于安全地获取用户空间传递给系统调用的参数
     return -1;
-  printf("Sys_trace: got the argument[ %d ]\n", n);
+  else{
+    struct proc *p = myproc();
+    p->trace_mask = mask; 
+  }
   return 0;
 }
 
