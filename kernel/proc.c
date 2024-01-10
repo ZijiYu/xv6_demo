@@ -662,8 +662,8 @@ procdump(void)
 uint64
 get_used_proc(){
   struct proc *p = myproc();
-  struct proc proc[NPROC];
   uint64 n = 0;
+  
   for(p = proc; p < &proc[NPROC]; p++){
     acquire(&p->lock);
     if(p->state != UNUSED){
