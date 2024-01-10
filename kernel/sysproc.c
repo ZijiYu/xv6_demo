@@ -131,21 +131,7 @@ sys_sysinfo(void){
   if(copyout(p->pagetable, addr, (char *)&addr, sizeof(addr)) < 0) // < 0 mean copy fail (from kernel to user)
     return -1;
 
-  printf("free memeory: %lu\n",info.freemem);
-  printf("used process: %lu\n",info.nproc);
+  // printf("free memeory: %lu\n",info.freemem);
+  // printf("used process: %lu\n",info.nproc);
   return 0;
-}
-
-
-uint64
-get_used_proc(){
-  struct proc *p = myproc();
-  struct proc proc[NPROC];
-  uint64 n = 0;
-  for(p = proc; p < &proc[NPROC]; p++){
-    if(p->state != UNUSED){
-      n++;
-    }
-  }
-  return n;
 }
