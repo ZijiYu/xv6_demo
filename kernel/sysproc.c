@@ -114,7 +114,7 @@ uint64
 sys_sysinfo(void){
   uint64 addr; // user pointer to struct sysinfo
   struct proc *p; // myproc
-  struct sysinfo info; 
+  struct sysinfo *info; 
 
    if(argaddr(0, &addr) < 0) // only one argument "a pointer to a struct sysinfo"
     return -1;
@@ -125,15 +125,15 @@ sys_sysinfo(void){
   printf("SYS_info: hi!\n");
 
 
-  info.nproc = get_used_proc();
-  info.freemem = get_free_memory();
-  printf("free memeory: %d\n",info.freemem);
-  printf("used process: %d\n",info.nproc);
+  info-> nproc = get_used_proc();
+  info-> freemem = get_free_memory();
+  printf("free memeory: %lu\n",info-> freemem);
+  printf("used process: %lu\n",info-> nproc);
   return 0;
 }
 
 uint64
-get_free_memory(void){
+get_free_memory(){
   uint64 n = 0;
   struct run *r;
   r = kmem.freelist;
@@ -146,7 +146,7 @@ get_free_memory(void){
 }
 
 uint64
-get_used_proc(void){
+get_used_proc(){
   struct proc *p = myproc();
   struct proc proc[NPROC];
   uint64 n = 0;
