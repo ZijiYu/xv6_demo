@@ -80,6 +80,7 @@ kalloc(void)
     memset((char*)r, 5, PGSIZE); // fill with junk
   return (void*)r;
 }
+
 uint64
 get_free_memory(){
   uint64 n = 0;
@@ -89,8 +90,8 @@ get_free_memory(){
   acquire(&kmem.lock);
   while(r){
     r = r -> next;
-    n += PGSIZE;
+    n ++;
   }
   release(&kmem.lock);
-  return n; 
+  return n*PGSIZE; 
 }
