@@ -8,6 +8,9 @@
 #include "proc.h"
 #include "sysinfo.h"
 // #include "kalloc.c"
+uint64 get_free_memory();
+uint64 get_used_proc();
+
 
 uint64
 sys_exit(void)
@@ -128,8 +131,8 @@ sys_sysinfo(void){
   if(copyout(p->pagetable, addr, (char *)&addr, sizeof(addr)) < 0) // < 0 mean copy fail (from kernel to user)
     return -1;
 
-  printf("free memeory: %lu\n",info.freemem);
-  printf("used process: %lu\n",info.nproc);
+  // printf("free memeory: %lu\n",info.freemem);
+  // printf("used process: %lu\n",info.nproc);
   return 0;
 }
 
