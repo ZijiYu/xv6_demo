@@ -6,6 +6,8 @@
 #include "memlayout.h"
 #include "spinlock.h"
 #include "proc.h"
+#include "sysinfo.h"
+#include "kalloc.c"
 
 uint64
 sys_exit(void)
@@ -110,6 +112,48 @@ sys_trace(void){
 
 uint64
 sys_sysinfo(void){
+  uint64 addr; // user pointer to struct sysinfo
+  struct proc *p; // myproc
+  struct sysinfo *info; 
+
+   if(argaddr(0, &addr) < 0) // only one argument "a pointer to a struct sysinfo"
+    return -1;
+
+  if(copyout(p->pagetable, addr, (char *)&addr, sizeof(addr)) < 0) // < 0 mean copy fail (from kernel to user)
+    return -1;
+
   printf("SYS_info: hi!\n");
+
+
+  info -> nproc = get_used_proc();
+  info -> freemem = get_free_memory();
+  printf("free memeory: %d\n",info->freemem);
+  printf("used process: %d\n",info->nproc);
   return 0;
+}
+
+uint64
+get_free_memory(void){
+  struct run *r;
+  r = kmem.freelist;
+  int n = 0;
+
+  while(r){
+    kmem.freelist = r -> next;
+    n += PGSIZE;
+  }
+  return n;
+}
+
+uint64
+get_used_proc(void){
+  struct proc *p = myproc;
+  struct proc proc[NPROC];
+  int n = 0;
+  for(p = proc; p < &proc[NPROC]; p++){
+    if(p->state != UNUSED){
+      n++;
+    }
+  }
+  return n;
 }
