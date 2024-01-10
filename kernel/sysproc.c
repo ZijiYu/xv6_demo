@@ -128,8 +128,8 @@ sys_sysinfo(void){
   if(copyout(p->pagetable, addr, (char *)&addr, sizeof(addr)) < 0) // < 0 mean copy fail (from kernel to user)
     return -1;
 
-  printf("free memeory: %u\n",info.freemem);
-  printf("used process: %u\n",info.nproc);
+  printf("free memeory: %lu\n",info.freemem);
+  printf("used process: %lu\n",info.nproc);
   return 0;
 }
 
