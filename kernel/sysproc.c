@@ -109,7 +109,7 @@ sys_trace(void){
 }
 
 uint64
-sys_sysinfo(struct sysinfo *){
+sys_sysinfo(void){
   printf("SYS_info: hi!\n");
   return 0;
 }
