@@ -116,7 +116,7 @@ sys_trace(void){
 uint64
 sys_sysinfo(void){
   uint64 addr; // user pointer to struct sysinfo
-  struct proc *p; // myproc
+  struct proc *p = myproc();
   struct sysinfo info; 
 
   printf("SYS_info: hi!\n");
