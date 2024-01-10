@@ -108,3 +108,8 @@ sys_trace(void){
   return 0;
 }
 
+uint64
+sys_sysinfo(struct sysinfo *){
+  printf("SYS_info: hi!\n");
+  return 0;
+}
