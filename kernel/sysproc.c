@@ -116,17 +116,18 @@ sys_sysinfo(void){
   struct proc *p; // myproc
   struct sysinfo info; 
 
-   if(argaddr(0, &addr) < 0) // only one argument "a pointer to a struct sysinfo"
-    return -1;
-
-  if(copyout(p->pagetable, addr, (char *)&addr, sizeof(addr)) < 0) // < 0 mean copy fail (from kernel to user)
-    return -1;
-
   printf("SYS_info: hi!\n");
 
 
   info.nproc = get_used_proc();
   info.freemem = get_free_memory();
+
+  if(argaddr(0, &addr) < 0) // only one argument "a pointer to a struct sysinfo"
+    return -1;
+
+  if(copyout(p->pagetable, addr, (char *)&addr, sizeof(addr)) < 0) // < 0 mean copy fail (from kernel to user)
+    return -1;
+
   printf("free memeory: %u\n",info.freemem);
   printf("used process: %u\n",info.nproc);
   return 0;
