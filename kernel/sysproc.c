@@ -140,3 +140,10 @@ sys_pgaccess(void)
   printf("日你妈！\n");
   return 0;
 }
+
+uint64
+sys_ugetpid(void)
+{
+  // lab pgtbl: your code here.
+  return myproc()->pid;
+}
