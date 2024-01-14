@@ -137,5 +137,6 @@ uint64
 sys_pgaccess(void)
 {
   // lab pgtbl: your code here.
+  printf("日你妈！\n");
   return 0;
 }

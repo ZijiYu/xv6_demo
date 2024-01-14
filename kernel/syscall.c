@@ -107,7 +107,7 @@ extern uint64 sys_uptime(void);
 extern uint64 sys_trace(void);
 extern uint64 sys_sysinfo(void);
 extern uint64 sys_ugetpid(void);
-extern uint64 SYS_pgaccess(void);
+extern uint64 sys_pgaccess(void);
 
 static uint64 (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
