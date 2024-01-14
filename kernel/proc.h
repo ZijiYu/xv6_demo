@@ -109,5 +109,5 @@ struct proc {
   // for syscall_traec
   int trace_mask;              // Trace's mask
   // for pgtbl usyscall
-  struct usyscall *t;
+  struct usyscall *usyscall;   // data page for usyscall.S
 };
