@@ -134,7 +134,7 @@ static uint64 (*syscalls[])(void) = {
 [SYS_trace]   sys_trace,
 [SYS_sysinfo] sys_sysinfo,
 [SYS_pgaccess] sys_pgaccess,
-[SYS_pgaccess] sys_ugetpid,
+[SYS_ugetpid] sys_ugetpid,
 #ifdef LAB_NET
 [SYS_connect] sys_connect,
 #endif
