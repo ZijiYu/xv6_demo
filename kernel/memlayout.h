@@ -70,6 +70,3 @@
 struct usyscall {
   int pid;  // Process ID
 };
-// #ifdef LAB_PGTBL
-
-// #endif
