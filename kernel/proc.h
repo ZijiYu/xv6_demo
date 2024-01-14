@@ -107,5 +107,7 @@ struct proc {
   char name[16];               // Process name (debugging)
 
   // for syscall_traec
-  int trace_mask; 
+  int trace_mask;              // Trace's mask
+  // for pgtbl usyscall
+  struct usyscall *t;
 };
