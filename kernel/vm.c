@@ -286,7 +286,7 @@ freewalk(pagetable_t pagetable)
 void
 vmprint_rec(pagetable_t pagetable, int tag){
   if(tag > 2){
-    return 0;
+    return;
   }
 
 // there are 2^9 = 512 PTEs in a page table.
@@ -294,11 +294,10 @@ vmprint_rec(pagetable_t pagetable, int tag){
     pte_t pte = pagetable[i];
     if((pte & PTE_V)){
       // this PTE points to a lower-level page table.
-      char* child = (pagetable_t)PTE2PA(pte); 
       for(int j = tag; j; j--){
         printf(".. ");
       }
-      printf(".. %d: pte %p pa %p/n",i,pte,child);
+      printf(".. %d: pte %p pa %p/n",i,pte,(pagetable_t)PTE2PA(pte));
       vmprint_rec((pagetable_t)PTE2PA(pte),tag+1);
     }
   }
