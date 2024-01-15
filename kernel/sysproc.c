@@ -137,7 +137,7 @@ uint64
 sys_pgaccess(void)
 {
   // lab pgtbl: your code here.
-  printf("日你妈！\n");
+  printf("SYS_pgaccess: Hello World！\n");
   return 0;
 }
 

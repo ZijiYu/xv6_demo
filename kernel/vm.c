@@ -5,7 +5,7 @@
 #include "riscv.h"
 #include "defs.h"
 #include "fs.h"
-
+int level = 0;
 /*
  * the kernel's page table.
  */
@@ -279,6 +279,36 @@ freewalk(pagetable_t pagetable)
     }
   }
   kfree((void*)pagetable);
+}
+
+// Recursively valid page-table pages.
+// All leaf mappings must be print.
+void
+vmprint_rec(pagetable_t pagetable, int tag){
+  if(tag > 2){
+    return 0;
+  }
+
+// there are 2^9 = 512 PTEs in a page table.
+  for(int i = 0; i < 512; i++){
+    pte_t pte = pagetable[i];
+    if((pte & PTE_V)){
+      // this PTE points to a lower-level page table.
+      char* child = (pagetable_t)PTE2PA(pte); 
+      for(int j = tag; j; j--){
+        printf(".. ");
+      }
+      printf(".. %d: pte %p pa %p/n",i,pte,child);
+      vmprint_rec((pagetable_t)PTE2PA(pte),tag+1);
+    }
+  }
+}
+
+void
+vmprint(pagetable_t pagetable){
+  int tag = 0;
+  printf("page table %p\n",pagetable);
+  vmprint_rec(pagetable,tag);
 }
 
 // Free user memory pages,
