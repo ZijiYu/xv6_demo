@@ -297,7 +297,7 @@ vmprint_rec(pagetable_t pagetable, uint64 depth){
       for(int j = depth; j; j--){
         printf(".. ");
       }
-      printf(".. %d: pte %p pa %p/n",i,pte,(pagetable_t)PTE2PA(pte));
+      printf(".. %d: pte %p pa %p\n",i,pte,(pagetable_t)PTE2PA(pte));
       vmprint_rec((pagetable_t)PTE2PA(pte),depth+1);
 
     }
