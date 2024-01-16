@@ -141,12 +141,12 @@ memcpy(void *dst, const void *src, uint n)
   return memmove(dst, src, n);
 }
 
-#ifdef LAB_PGTBL
-int
-ugetpid(void)
-{
-  // struct usyscall *u = (struct usyscall *)USYSCALL;
-  // return u->pid;
-  return getpid();
-}
-#endif
+// #ifdef LAB_PGTBL
+// int
+// ugetpid(void)
+// {
+//   // struct usyscall *u = (struct usyscall *)USYSCALL;
+//   // return u->pid;
+//   return getpid();
+// }
+// #endif

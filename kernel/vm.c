@@ -284,8 +284,8 @@ freewalk(pagetable_t pagetable)
 // Recursively valid page-table pages.
 // All leaf mappings must be print.
 void
-vmprint_rec(pagetable_t pagetable, int tag){
-  if(tag > 2){
+vmprint_rec(pagetable_t pagetable, uint64 depth){
+  if(depth > 2){
     return;
   }
 
@@ -294,11 +294,12 @@ vmprint_rec(pagetable_t pagetable, int tag){
     pte_t pte = pagetable[i];
     if((pte & PTE_V)){
       // this PTE points to a lower-level page table.
-      for(int j = tag; j; j--){
+      for(int j = depth; j; j--){
         printf(".. ");
       }
       printf(".. %d: pte %p pa %p/n",i,pte,(pagetable_t)PTE2PA(pte));
-      vmprint_rec((pagetable_t)PTE2PA(pte),tag+1);
+      vmprint_rec((pagetable_t)PTE2PA(pte),depth+1);
+
     }
   }
 }

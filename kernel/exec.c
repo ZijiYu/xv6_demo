@@ -8,6 +8,7 @@
 #include "elf.h"
 
 static int loadseg(pde_t *pgdir, uint64 addr, struct inode *ip, uint offset, uint sz);
+void vmprint(pagetable_t pagetable);
 
 int
 exec(char *path, char **argv)

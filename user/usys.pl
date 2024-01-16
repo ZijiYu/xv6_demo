@@ -40,4 +40,3 @@ entry("trace");
 entry("sysinfo");
 entry("connect");
 entry("pgaccess");
-entry("ugetpid");
