@@ -166,7 +166,7 @@ sys_pgaccess(void)
     res = res | abit << i;
   }
   // copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len)
-  if(copyout(p->pagetable, bitmask , (char *)&res, sizeof(len)) < 0){
+  if(copyout(p->pagetable, bitmask , (char *)&res, sizeof(res)) < 0){
     return -1;
   }
   return 0;
