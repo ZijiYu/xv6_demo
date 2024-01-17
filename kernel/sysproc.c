@@ -151,7 +151,7 @@ sys_pgaccess(void)
     return -1;
   }
 
-  uint64 bitmask;
+  int bitmask;
   if(argint(2,&bitmask) < 0){
     return -1;
   }
