@@ -158,7 +158,7 @@ sys_pgaccess(void)
 
   if(len>32) len = 32;
 
-  int res = 0x1111;
+  int res = 0;
   struct proc *p = myproc();
   for(int i = 0; i < len; i ++){
     int va = addr + i * PGSIZE;
