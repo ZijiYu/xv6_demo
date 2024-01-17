@@ -464,3 +464,25 @@ copyinstr(pagetable_t pagetable, char *dst, uint64 srcva, uint64 max)
     return -1;
   }
 }
+
+
+int
+vm_pgaccess(pagetable_t pagetable, uint64 va)
+{
+  pte_t *pte;
+  uint64 pa;
+  // va 不合规  直接退出 查看是否大于等于39(27+12-1)
+  if(va >= MAXVA)
+    return 0;
+  // 获取va在pagetable中的pte
+  pte = walk(pagetable, va, 0);
+
+  if((*pte & PTE_A)!= 0){
+    *pte =(*pte | ~ PTE_A);//清除第六位
+    return 1;
+  }
+
+  // 全部合规则转化为PA
+  pa = PTE2PA(*pte);
+  return pa;
+}

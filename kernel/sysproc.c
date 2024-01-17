@@ -156,8 +156,15 @@ sys_pgaccess(void)
     return -1;
   }
 
+  if(len>32) len = 32;
+
   int res = 0x1111;
   struct proc *p = myproc();
+  for(int i = 0; i < len; i ++){
+    int va = addr + i * PGSIZE;
+    int abit = vm_pgaccess(p-> pagetable,va);
+    res = res | abit << i;
+  }
   // copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len)
   if(copyout(p->pagetable, bitmask , (char *)&res, sizeof(len)) < 0){
     return -1;
