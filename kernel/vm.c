@@ -283,6 +283,7 @@ freewalk(pagetable_t pagetable)
 
 // Recursively valid page-table pages.
 // All leaf mappings must be print.
+// dfs deep first search
 void
 vmprint_rec(pagetable_t pagetable, uint64 depth){
   if(depth > 2){
@@ -298,6 +299,7 @@ vmprint_rec(pagetable_t pagetable, uint64 depth){
         printf(".. ");
       }
       printf(".. %d: pte %p pa %p\n",i,pte,(pagetable_t)PTE2PA(pte));
+      // step in to another recursion
       vmprint_rec((pagetable_t)PTE2PA(pte),depth+1);
 
     }

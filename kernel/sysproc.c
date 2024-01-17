@@ -133,14 +133,39 @@ sys_sysinfo(void){
   return 0;
 }
 
-uint64
+#ifdef LAB_PGTBL
+int
 sys_pgaccess(void)
 {
   // lab pgtbl: your code here.
-  printf("SYS_pgaccess: Hello World！\n");
+
+  int len;
+
+  if(argint(0, &len) < 0){
+    return -1;
+  }
+
+  uint64 addr;
+
+  if(argaddr(1, &addr) < 0){
+    return -1;
+  }
+
+  uint64 bitmask;
+  if(argint(2,&bitmask) < 0){
+    return -1;
+  }
+
+  int res = 0x1111;
+  struct proc *p = myproc();
+  // copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len)
+  if(copyout(p->pagetable, bitmask , (char *)&res, sizeof(len)) < 0){
+    return -1;
+  }
+  return 0;
   return 0;
 }
-
+#endif
 uint64
 sys_ugetpid(void)
 {
