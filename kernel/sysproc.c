@@ -12,6 +12,8 @@ uint64 get_free_memory();
 uint64 get_used_proc();
 pte_t *
 walk(pagetable_t pagetable, uint64 va, int alloc);
+int
+vm_pgaccess(pagetable_t pagetable, uint64 va);
 
 uint64
 sys_exit(void)
@@ -135,62 +137,44 @@ sys_sysinfo(void){
 }
 
 #ifdef LAB_PGTBL
-// int
-// sys_pgaccess(void)
-// {
-//   // lab pgtbl: your code here.
+int
+sys_pgaccess(void) {
+  // lab pgtbl: your code here.
 
-//   int len;
-//   uint64 addr;
-//   int bitmask;
-//   if(argint(0, &len) < 0){
-//     return -1;
-//   }
-
-//   if(argaddr(1, &addr) < 0){
-//     return -1;
-//   }
-
-//   if(argint(2,&bitmask) < 0){
-//     return -1;
-//   }
-
-//   if(len>32) len = 32;
-
-//   int res = 0;
-//   struct proc *p = myproc();
-//   for(int i = 0; i < len; i ++){
-//     int va = addr + i * PGSIZE;
-//     int abit = vm_pgaccess(p-> pagetable,va);
-//     res = res | abit << i;
-//   }
-//   // copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len)
-//   if(copyout(p->pagetable, bitmask , (char *)&res, sizeof(res)) < 0){
-//     return -1;
-//   }
-//   return 0;
-// }
-
-int sys_pgaccess(void)
-{
-  uint64 st;
-  argaddr(0,&st);//获取user page虚拟地址
-  char *buf = (char*)st;
-  int len = 0;
-  argint(1,&len);//获取要check的页数
-  if(len > 32)len = 32;//限制check最大页数
-  unsigned int abits = 0;//存储位掩码
-  for(int i = 0; i < len; i++){
-    pte_t *pte = walk(myproc()->pagetable, (uint64)buf+PGSIZE * i, 0);//获取最下级页表表项
-    // (+PGSIZE*i)起到换页的效果
-    if(*pte & PTE_A){
-    	*pte &= ~PTE_A;//清除PTE_A
-    	abits |= (1 << i);//获取位掩码
-    }
-  }
-  argaddr(2,&st);//获取缓冲区的地址
-  if(copyout(myproc()->pagetable, st, (char *)&abits, sizeof(abits)) < 0)//将位掩码拷贝到用户缓冲区
+  int len;
+  uint64 addr;
+  uint64 bitmask;
+  char*buf = (char*)addr;
+  if(argaddr(0, &addr) < 0){
     return -1;
+  }
+
+  if(argint(1, &len) < 0){
+    return -1;
+  }
+
+  if(argint(2,&bitmask) < 0){
+    return -1;
+  }
+
+  if(len>32) len = 32;
+  unsigned int abits = 0;
+
+  for(int i = 0; i < len; i ++){
+    //walk(pagetable_t pagetable, uint64 va, int alloc)
+    pte_t * p = walk(myproc()->pagetable, (uint64)buf+i*PGSIZE,0);
+
+    if(*p & PTE_A){
+      *p =*p&( ~PTE_A); // clean PTE_A
+      abits |=(1<<i);// Perform bit operations, make i in abit to 1(index)
+    }
+    
+  }
+  
+  // copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len)
+  if(copyout(myproc()->pagetable, bitmask , (char *)&abits, sizeof(abits)) < 0){
+    return -1;
+  }
   return 0;
 }
 
