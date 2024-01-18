@@ -10,7 +10,8 @@
 
 uint64 get_free_memory();
 uint64 get_used_proc();
-
+pte_t *
+walk(pagetable_t pagetable, uint64 va, int alloc);
 
 uint64
 sys_exit(void)
