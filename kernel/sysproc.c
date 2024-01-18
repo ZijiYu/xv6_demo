@@ -140,11 +140,9 @@ sys_sysinfo(void){
 int
 sys_pgaccess(void) {
   // lab pgtbl: your code here.
-
-  int len;
   uint64 addr;
-  uint64 bitmask;
-  char*buf = (char*)addr;
+  int len;
+  int bitmask;
   if(argaddr(0, &addr) < 0){
     return -1;
   }
@@ -157,6 +155,7 @@ sys_pgaccess(void) {
     return -1;
   }
 
+  char*buf = (char*)addr;
   if(len>32) len = 32;
   unsigned int abits = 0;
 
