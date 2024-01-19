@@ -1,7 +1,6 @@
 #include "kernel/types.h"
 #include "user/user.h"
 #include "kernel/param.h"
-#include <stddef.h>
 
 void main(){
     int pid = fork();
@@ -12,7 +11,7 @@ void main(){
         // ... 父进程的代码 ...
 
         // 等待子进程结束
-        wait(NULL);
+        wait(0);
         printf("child %d is done\n", pid);
     } else if (pid == 0) {
         // 子进程
