@@ -4,9 +4,9 @@
 
 void main(){
 int pid = fork();
-int status;
+int status = 10;
 if (!pid) {
-    wait(10);
+    wait(&status);
     printf("this is child\n"); // this line
 } else{
     printf("parent: I have a child=%d\n", pid);// this line
