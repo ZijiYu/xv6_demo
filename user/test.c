@@ -4,7 +4,6 @@
 
 void main(){
 int pid = fork();
-int status = 10;
 if (!pid) {
     printf("this is child\n"); // this line
 } else{
