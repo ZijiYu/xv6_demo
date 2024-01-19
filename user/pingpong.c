@@ -9,12 +9,12 @@ int main(){
         // if(fork()) is equal to if(fork()>0)
         write(p[1],"ping\n",6);
         wait(0);
-        printf("[received ping:%d]\n",getpid());
+        printf("[received: %s pid:%d]\n",p[0], getpid());
     }else{
         // else is equal to else if(fork()==0)
          read(p[0],"pong\n",6);
          wait(0);
-         printf("[received pong: %d]\n",pid);
+         printf("[received: %s pid: %d]\n"p[1],pid);
     }
 
     exit(0);
