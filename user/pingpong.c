@@ -14,7 +14,7 @@ int main(){
         // else is equal to else if(fork()==0)
          read(p[0],"pong\n",6);
          wait(0);
-         printf("[received: %s pid: %d]\n"p[1],pid);
+         printf("[received: %s pid: %d]\n",p[1],pid);
     }
 
     exit(0);
