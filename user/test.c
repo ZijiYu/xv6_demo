@@ -6,12 +6,11 @@ void main(){
 int pid = fork();
 int status = 10;
 if (!pid) {
-    wait(&status);
     printf("this is child\n"); // this line
 } else{
     printf("parent: I have a child=%d\n", pid);// this line
-    wait(&status);
-    printf("child status: %d \n", status);
+    wait(NULL);
+    printf("child status: %d \n", pid);
 }
 exit(0);
 }
