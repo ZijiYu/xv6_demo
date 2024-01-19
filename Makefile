@@ -196,6 +196,8 @@ UPROGS=\
 	$U/_trace\
 	$U/_sysinfotest\
 	$U/_pgtbltest\
+	$U/_test\
+
 
 
 
