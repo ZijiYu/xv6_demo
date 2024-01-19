@@ -8,8 +8,8 @@ if (!pid) {
     printf("this is child\n");
 } else{
     printf("parent: I have a child=%d\n", pid);
-    pid = wait((int *) 0);
-    printf("child %d is done\n", pid);
+    wait(&status);
+    printf("child status: %d \n", status);
 }
 exit(0);
 }
