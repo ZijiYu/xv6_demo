@@ -11,7 +11,7 @@ void main(){
         // ... 父进程的代码 ...
 
         // 等待子进程结束
-        wait(0);
+        pid  = wait((int*) 0 );
         printf("child %d is done\n", pid);
     } else if (pid == 0) {
         // 子进程
